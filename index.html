@@ -4,50 +4,73 @@
   <meta charset="utf-8">
   <title>confirm-click</title>
   <script src="node_modules/es5-shim/es5-shim.js"></script>
-  <script>
-    // just to show 3rd party confirm, should return a boolean
-    function ask(question) {
-      return confirm('Asking: ' + question);
+  <link rel="stylesheet" href="alertify/alertify.core.css" />
+  <link rel="stylesheet" href="alertify/alertify.default.css" />
+  <script src="alertify/alertify.js"></script>
+  <style>
+    #click-app {
+      padding: 5px;
+      margin: 10px 0px;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      white-space: pre;
+      font-family: monospace;
     }
-
-    function rejectAfterTimeout(question) {
-      var injector = angular.element(document.body).injector();
-      var $timeout = injector.get('$timeout');
-      console.log('reject after timeout question', question);
-      console.log('reject after timeout starts delay 1 sec');
-      return $timeout(function () {
-        console.log('rejectAfterTimeout is returning false');
-        return false;
-      }, 1000);
+    #click-app:before {
+      content: "module that configures and uses confirm-click";
+      font-style: italic;
+      color: #555;
     }
-  </script>
+  </style>
 </head>
 <body ng-app="ClickApp">
   <h2>confirm-click</h2>
 
   <h3>regular href</h3>
-  Go to <a href="http://glebbahmutov.com"
-    confirm-click="Do you want to leave this page?">glebbahmutov.com</a>
-
-  Go to <a href="http://github.com"
-    confirm-click="Go to github?" confirm-fn="ask">github.com</a>
+  Go to <a href="http://github.com" confirm-click="Go to github?">github.com</a>
 
   <h3>ng-href</h3>
-  Go to <a ng-href="http://github.com"
-    confirm-click="Go to github?" confirm-fn="ask">github.com</a>
+  Go to <a ng-href="http://github.com" confirm-click="Go to github?">github.com</a>
 
   <h3>ng-click</h3>
   <section ng-controller="ClickController">
-    <button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert with bool sync confirm</button>
+    <p>Confirm function is a promise-returning wrapper around
+    <a href="http://fabien-d.github.io/alertify.js/">alertify.js</a>. See the code for configuring
+    and usig the <em>confirm-click</em> module below.</p>
 
-    <button ng-click="popAlert()"
-      confirm-click="Want to see a popup?"
-      confirm-fn="rejectAfterTimeout">pop alert with promise-based rejection</button>
+    <button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert with promise confirm</button>
   </section>
 
   <script src="node_modules/console-log-div/console-log-div.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="confirm-click.js"></script>
-  <script src="click-app.js"></script>
+  <script id="click-app">
+    // just to show 3rd party confirm, should return a boolean
+    function ask(question) {
+      return confirm('Asking: ' + question);
+    }
+
+    angular.module('ClickApp', ['confirm-click'])
+      .config(function (ConfirmClickProvider) {
+        ConfirmClickProvider.set({
+          sync: ask,
+          async: function (question) {
+            console.log('returning a promise to ask "' + question + '"');
+            return new Promise(function (resolve) {
+              alertify.confirm(question, function (answer) {
+                console.log('User responded', answer);
+                resolve(answer);
+              });
+            });
+          }
+        });
+      })
+      .controller('ClickController', function ($scope) {
+        $scope.popAlert = function () {
+          alert('pop alert!');
+        };
+      });
+  </script>
 </body>
 </html>
