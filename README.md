@@ -3,14 +3,14 @@
 > Angular directive for simple href or ng-click confirmation before proceeding
 
 ```html
-<a href="http://github.com" confirm-click="Do you want to leave this page?">github.com</a>
+<a href="http://github.com" confirm-click="Go to github?">github.com</a>
 ```
 
 ## Install and use
 
-1. `npm install confirm-click --save` 
-2. Add `confirm-click` module dependency to your app
-3. there is no step 3
+1. `npm install confirm-click --save`
+2. Include `node_modules/confirm-click/confirm-click.js` 
+3. Add `confirm-click` module dependency to your app
 
 ## examples
 
@@ -23,7 +23,9 @@ function ask(question) {
   return confirm(question);
 }
 </script>
-<a ng-href="http://github.com" confirm-click="Go to github?" confirm-fn="ask">github.com</a>
+<a ng-href="http://github.com" 
+    confirm-click="Go to github?" 
+    confirm-fn="ask">github.com</a>
 ```
 
 ### Small print
