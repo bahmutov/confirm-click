@@ -8,6 +8,17 @@
     function ask(question) {
       return confirm('Asking: ' + question);
     }
+
+    function rejectAfterTimeout() {
+      var injector = angular.element(document.body).injector();
+      var $q = injector.get('$q');
+      var $timeout = injector.get('$timeout');
+      console.log('reject after timeout starts delay 1 sec');
+      return $timeout(function () {
+        console.log('rejectAfterTimeout is returning false');
+        return false;
+      }, 1000);
+    }
   </script>
 </head>
 <body ng-app="ClickApp">
@@ -25,12 +36,18 @@
     confirm-click="Go to github?" confirm-fn="ask">github.com</a>
 
   <section ng-controller="ClickController">
-    <h3>ng-click action</h3>
+    <h3>ng-click action boolean</h3>
     <a ng-click="popAlert()" href="javascript:void(0)"
-      confirm-click="Want to see a popiup?">pop alert</a>
+      confirm-click="Want to see a popup?">pop alert</a>
+
+    <h3>ng-click action promise-returning</h3>
+    <a ng-click="popAlert()" href="javascript:void(0)"
+      confirm-click="Want to see a popup?"
+      confirm-fn="rejectAfterTimeout">pop alert</a>
   </section>
 
   <script src="bower_components/angular/angular.js"></script>
+  <script src="confirm-click.js"></script>
   <script src="click-app.js"></script>
 </body>
 </html>

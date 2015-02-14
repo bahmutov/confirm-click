@@ -12,7 +12,14 @@
 2. Include `node_modules/confirm-click/confirm-click.js` 
 3. Add `confirm-click` module dependency to your app
 
-## examples
+### Confirming ng-click
+
+Works with regular boolean- or promise-returning functions.
+
+```html
+<a ng-click="popAlert()" href="javascript:void(0)"
+  confirm-click="Want to see a popup?">pop alert</a>
+```
 
 ### Custom popup function
 
