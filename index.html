@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>confirm-click</title>
+  <script>
+    // just to show 3rd party confirm, should return a boolean
+    function ask(question) {
+      return confirm('Asking: ' + question);
+    }
+  </script>
+</head>
+<body ng-app="ClickApp">
+  <h2>confirm-click</h2>
+
+  <h3>regular href</h3>
+  Go to <a href="http://glebbahmutov.com"
+    confirm-click="Do you want to leave this page?">glebbahmutov.com</a>
+
+  Go to <a href="http://github.com"
+    confirm-click="Go to github?" confirm-fn="ask">github.com</a>
+
+  <h3>ng-href</h3>
+  Go to <a ng-href="http://github.com"
+    confirm-click="Go to github?" confirm-fn="ask">github.com</a>
+
+  <section ng-controller="ClickController">
+    <h3>ng-click action</h3>
+    <a ng-click="popAlert()" href="javascript:void(0)"
+      confirm-click="Want to see a popiup?">pop alert</a>
+  </section>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="click-app.js"></script>
+</body>
+</html>
