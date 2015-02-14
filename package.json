@@ -1,7 +1,7 @@
 {
   "name": "confirm-click",
   "description": "Angular directive for simple href or ng-click confirmation before proceeding",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": {
     "url": "https://github.com/bahmutov/confirm-click/issues"
