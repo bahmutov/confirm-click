@@ -35,6 +35,28 @@ function ask(question) {
     confirm-fn="ask">github.com</a>
 ```
 
+### Custom popup function for ng-click
+
+Can return a promise, should resolve with `false` to stop the action.
+
+```html
+<script>
+  function rejectAfterTimeout() {
+    var injector = angular.element(document.body).injector();
+    var $q = injector.get('$q');
+    var $timeout = injector.get('$timeout');
+    console.log('reject after timeout starts delay 1 sec');
+    return $timeout(function () {
+      console.log('rejectAfterTimeout is returning false');
+      return false;
+    }, 1000);
+  }
+</script>
+<a ng-click="popAlert()" href="javascript:void(0)"
+  confirm-click="Want to see a popup?"
+  confirm-fn="rejectAfterTimeout">pop alert</a>
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015

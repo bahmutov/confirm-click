@@ -25,7 +25,7 @@ angular.module('confirm-click', [])
               scope[methodName] = function (event) {
                 $q.when(ask(question)).then(function (result) {
                   if (result) {
-                    element.prevClick(scope, { $event:event });
+                    attr.prevClick(scope, { $event:event });
                   }
                 });
               };
