@@ -36,15 +36,13 @@
   Go to <a ng-href="http://github.com"
     confirm-click="Go to github?" confirm-fn="ask">github.com</a>
 
+  <h3>ng-click</h3>
   <section ng-controller="ClickController">
-    <h3>ng-click action boolean</h3>
-    <a ng-click="popAlert()" href="javascript:void(0)"
-      confirm-click="Want to see a popup?">pop alert</a>
+    <button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert with bool sync confirm</button>
 
-    <h3>ng-click action promise-returning</h3>
-    <a ng-click="popAlert()" href="javascript:void(0)"
+    <button ng-click="popAlert()"
       confirm-click="Want to see a popup?"
-      confirm-fn="rejectAfterTimeout">pop alert</a>
+      confirm-fn="rejectAfterTimeout">pop alert with promise-based rejection</button>
   </section>
 
   <script src="node_modules/console-log-div/console-log-div.js"></script>

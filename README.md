@@ -25,8 +25,7 @@
 Works with regular boolean- or promise-returning functions.
 
 ```html
-<a ng-click="popAlert()" href="javascript:void(0)"
-  confirm-click="Want to see a popup?">pop alert</a>
+<button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert</button>
 ```
 
 ### Custom popup function
@@ -59,9 +58,9 @@ Can return a promise, should resolve with `false` to stop the action.
     }, 1000);
   }
 </script>
-<a ng-click="popAlert()" href="javascript:void(0)"
+<button ng-click="popAlert()"
   confirm-click="Want to see a popup?"
-  confirm-fn="rejectAfterTimeout">pop alert</a>
+  confirm-fn="rejectAfterTimeout">pop alert</button>
 ```
 
 ### Small print
