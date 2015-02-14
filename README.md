@@ -6,6 +6,14 @@
 <a href="http://github.com" confirm-click="Go to github?">github.com</a>
 ```
 
+[Demo](http://glebbahmutov.com/confirm-click/)
+
+[![NPM][confirm-click-icon] ][confirm-click-url]
+
+[![Build status][confirm-click-ci-image] ][confirm-click-ci-url]
+[![dependencies][confirm-click-dependencies-image] ][confirm-click-dependencies-url]
+[![devdependencies][confirm-click-devdependencies-image] ][confirm-click-devdependencies-url]
+
 ## Install and use
 
 1. `npm install confirm-click --save`
@@ -17,8 +25,7 @@
 Works with regular boolean- or promise-returning functions.
 
 ```html
-<a ng-click="popAlert()" href="javascript:void(0)"
-  confirm-click="Want to see a popup?">pop alert</a>
+<button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert</button>
 ```
 
 ### Custom popup function
@@ -51,9 +58,9 @@ Can return a promise, should resolve with `false` to stop the action.
     }, 1000);
   }
 </script>
-<a ng-click="popAlert()" href="javascript:void(0)"
+<button ng-click="popAlert()"
   confirm-click="Want to see a popup?"
-  confirm-fn="rejectAfterTimeout">pop alert</a>
+  confirm-fn="rejectAfterTimeout">pop alert</button>
 ```
 
 ### Small print
@@ -95,3 +102,12 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
+[confirm-click-icon]: https://nodei.co/npm/confirm-click.png?downloads=true
+[confirm-click-url]: https://npmjs.org/package/confirm-click
+[confirm-click-ci-image]: https://travis-ci.org/bahmutov/confirm-click.png?branch=master
+[confirm-click-ci-url]: https://travis-ci.org/bahmutov/confirm-click
+[confirm-click-dependencies-image]: https://david-dm.org/bahmutov/confirm-click.png
+[confirm-click-dependencies-url]: https://david-dm.org/bahmutov/confirm-click
+[confirm-click-devdependencies-image]: https://david-dm.org/bahmutov/confirm-click/dev-status.png
+[confirm-click-devdependencies-url]: https://david-dm.org/bahmutov/confirm-click#info=devDependencies
