@@ -39,6 +39,7 @@
   "license": "MIT",
   "main": "confirm-click.js",
   "pre-commit": [
+    "npm test",
     "npm version"
   ],
   "repository": {
@@ -46,6 +47,6 @@
     "url": "git@github.com:bahmutov/confirm-click.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt"
   }
 }

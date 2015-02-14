@@ -6,6 +6,8 @@
 <a href="http://github.com" confirm-click="Go to github?">github.com</a>
 ```
 
+[Demo](http://glebbahmutov.com/confirm-click/)
+
 ## Install and use
 
 1. `npm install confirm-click --save`
