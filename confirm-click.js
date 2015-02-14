@@ -1,19 +1,18 @@
 angular.module('confirm-click', [])
   .directive('confirmClick', ['$window', '$q', '$parse', function ($window, $q, $parse) {
-    var name = 'confirmClick';
     var counter = 1;
     return {
       restrict: 'A',
       priority: 1001,
 
-      compile: function(elem, attr){
-        if (attr.ngClick) {
-          attr.prevClick = $parse(attr.ngClick, /* interceptorFn */ null, /* expensiveChecks */ true);;
-          attr.ngClick = '__confirmClick' + counter++ + '()';
+      compile: function (elem, attributes) {
+        if (attributes.ngClick) {
+          attributes.prevClick = $parse(attributes.ngClick, /* interceptorFn */ null, /* expensiveChecks */ true);
+          attributes.ngClick = '__confirmClick' + counter++ + '()';
         }
 
         return {
-          pre: function(scope, element, attr){
+          pre: function (scope, element, attr) {
 
             var question = attr.confirmClick || 'Are you sure?';
             var ask = $window[attr.confirmFn] || confirm;
@@ -25,7 +24,7 @@ angular.module('confirm-click', [])
               scope[methodName] = function (event) {
                 $q.when(ask(question)).then(function (result) {
                   if (result) {
-                    attr.prevClick(scope, { $event:event });
+                    attr.prevClick(scope, { $event: event });
                   }
                 });
               };
@@ -39,7 +38,7 @@ angular.module('confirm-click', [])
               });
             }
           }
-        }
+        };
       }
     };
   }]);
