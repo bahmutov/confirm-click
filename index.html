@@ -9,10 +9,10 @@
       return confirm('Asking: ' + question);
     }
 
-    function rejectAfterTimeout() {
+    function rejectAfterTimeout(question) {
       var injector = angular.element(document.body).injector();
-      var $q = injector.get('$q');
       var $timeout = injector.get('$timeout');
+      console.log('reject after timeout question', question);
       console.log('reject after timeout starts delay 1 sec');
       return $timeout(function () {
         console.log('rejectAfterTimeout is returning false');

@@ -41,9 +41,8 @@ Can return a promise, should resolve with `false` to stop the action.
 
 ```html
 <script>
-  function rejectAfterTimeout() {
+  function rejectAfterTimeout(question) {
     var injector = angular.element(document.body).injector();
-    var $q = injector.get('$q');
     var $timeout = injector.get('$timeout');
     console.log('reject after timeout starts delay 1 sec');
     return $timeout(function () {
