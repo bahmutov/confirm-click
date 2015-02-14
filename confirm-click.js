@@ -1,14 +1,15 @@
 angular.module('confirm-click', [])
   .directive('confirmClick', ['$window', '$q', '$parse', function ($window, $q, $parse) {
     var name = 'confirmClick';
+    var counter = 1;
     return {
       restrict: 'A',
       priority: 1001,
 
       compile: function(elem, attr){
         if (attr.ngClick) {
-          attr.prevClick = attr.ngClick;
-          attr.ngClick = '__confirmClick()';
+          attr.prevClick = $parse(attr.ngClick, /* interceptorFn */ null, /* expensiveChecks */ true);;
+          attr.ngClick = '__confirmClick' + counter++ + '()';
         }
 
         return {
@@ -19,12 +20,12 @@ angular.module('confirm-click', [])
 
             if (attr.ngClick && attr.prevClick) {
 
-              var fn = $parse(attr.prevClick, /* interceptorFn */ null, /* expensiveChecks */ true);
-
-              scope.__confirmClick = function (event) {
+              // strip ()
+              var methodName = attr.ngClick.substr(0, attr.ngClick.length - 2);
+              scope[methodName] = function (event) {
                 $q.when(ask(question)).then(function (result) {
                   if (result) {
-                    fn(scope, { $event:event });
+                    element.prevClick(scope, { $event:event });
                   }
                 });
               };
