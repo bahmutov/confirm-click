@@ -51,11 +51,11 @@ module.exports = function (grunt) {
       src: [
         'README.md',
         'confirm-click.js',
-        'click-app.js',
         'index.html',
         'node_modules/es5-shim/es5-shim.js',
         'node_modules/console-log-div/console-log-div.js',
-        'bower_components/angular/angular.js'
+        'bower_components/angular/angular.js',
+        'alertify/*'
       ]
     }
   });

@@ -28,7 +28,10 @@ Works with regular boolean- or promise-returning functions.
 <button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert</button>
 ```
 
-### Custom popup function
+### Configure custom popup function
+
+Use `ConfirmClickProvider` function to set `sync` function. This function
+will be used for `href` and `ng-href` confirmation.
 
 ```html
 <script>
@@ -36,32 +39,38 @@ Works with regular boolean- or promise-returning functions.
 function ask(question) {
   return confirm(question);
 }
+angular.module('ClickApp', ['confirm-click'])
+  .config(function (ConfirmClickProvider) {
+    ConfirmClickProvider.set({
+      sync: ask
+    });
+  });
 </script>
-<a ng-href="http://github.com" 
-    confirm-click="Go to github?" 
-    confirm-fn="ask">github.com</a>
+<a ng-href="http://github.com" confirm-click="Go to github?">github.com</a>
 ```
 
 ### Custom popup function for ng-click
 
-Can return a promise, should resolve with `false` to stop the action.
+Can return a promise, should resolve with `false` to stop the action, or with true to continue.
+For example to use [alertify.js](http://fabien-d.github.io/alertify.js/) to confirm, we can use
 
 ```html
 <script>
-  function rejectAfterTimeout(question) {
-    var injector = angular.element(document.body).injector();
-    var $timeout = injector.get('$timeout');
-    console.log('reject after timeout starts delay 1 sec');
-    return $timeout(function () {
-      console.log('rejectAfterTimeout is returning false');
-      return false;
-    }, 1000);
-  }
+angular.module('ClickApp', ['confirm-click'])
+  .config(function (ConfirmClickProvider) {
+    ConfirmClickProvider.set({
+      async: function (question) {
+        return new Promise(function (resolve) {
+          alertify.confirm(question, resolve);
+        });
+      }
+    });
+  })
 </script>
-<button ng-click="popAlert()"
-  confirm-click="Want to see a popup?"
-  confirm-fn="rejectAfterTimeout">pop alert</button>
+<button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert</button>
 ```
+
+See [demo](http://glebbahmutov.com/confirm-click/) page for live example.
 
 ### Small print
 
