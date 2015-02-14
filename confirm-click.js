@@ -22,9 +22,11 @@ angular.module('confirm-click', [])
               var fn = $parse(attr.prevClick, /* interceptorFn */ null, /* expensiveChecks */ true);
 
               scope.__confirmClick = function (event) {
-                if (ask(question)) {
-                  fn(scope, { $event:event });
-                }
+                $q.when(ask(question)).then(function (result) {
+                  if (result) {
+                    fn(scope, { $event:event });
+                  }
+                });
               };
             } else {
               // probably regular href links
