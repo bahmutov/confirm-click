@@ -70,6 +70,9 @@ angular.module('ClickApp', ['confirm-click'])
 <button ng-click="popAlert()" confirm-click="Want to see a popup?">pop alert</button>
 ```
 
+A good library wrapping alertify into promise-returning methods is 
+[kensho/ng-alertify](https://github.com/kensho/ng-alertify).
+
 See [demo](http://glebbahmutov.com/confirm-click/) page for live example.
 
 ### Small print
