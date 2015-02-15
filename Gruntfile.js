@@ -54,6 +54,7 @@ module.exports = function (grunt) {
         'index.html',
         'node_modules/es5-shim/es5-shim.js',
         'node_modules/console-log-div/console-log-div.js',
+        'node_modules/ng-alertify/ng-alertify.js',
         'bower_components/angular/angular.js',
         'alertify/*'
       ]

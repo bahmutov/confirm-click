@@ -44,6 +44,7 @@
 
   <script src="node_modules/console-log-div/console-log-div.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="node_modules/ng-alertify/ng-alertify.js"></script>
   <script src="confirm-click.js"></script>
   <script id="click-app">
     // just to show 3rd party confirm, should return a boolean
@@ -51,18 +52,14 @@
       return confirm('Asking: ' + question);
     }
 
-    angular.module('ClickApp', ['confirm-click'])
+    angular.module('ClickApp', ['confirm-click', 'Alertify'])
       .config(function (ConfirmClickProvider) {
         ConfirmClickProvider.set({
           sync: ask,
           async: function (question) {
             console.log('returning a promise to ask "' + question + '"');
-            return new Promise(function (resolve) {
-              alertify.confirm(question, function (answer) {
-                console.log('User responded', answer);
-                resolve(answer);
-              });
-            });
+            var Alertify = angular.element(document.body).injector().get('Alertify');
+            return Alertify.confirm(question);
           }
         });
       })
