@@ -75,6 +75,8 @@ A good library wrapping alertify into promise-returning methods is
 
 See [demo](http://glebbahmutov.com/confirm-click/) page for live example.
 
+![example ng-click](images/confirm-click.png)
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015
