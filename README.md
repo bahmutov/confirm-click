@@ -30,7 +30,7 @@ Works with regular boolean- or promise-returning functions.
 
 ### Configure custom popup function
 
-Use `ConfirmClickProvider` function to set `sync` function. This function
+Use `ConfirmClickProvider` function to set `ask` function. This function
 will be used for `href` and `ng-href` confirmation.
 
 ```html
@@ -41,9 +41,7 @@ function ask(question) {
 }
 angular.module('ClickApp', ['confirm-click'])
   .config(function (ConfirmClickProvider) {
-    ConfirmClickProvider.set({
-      sync: ask
-    });
+    ConfirmClickProvider.ask(ask);
   });
 </script>
 <a ng-href="http://github.com" confirm-click="Go to github?">github.com</a>
@@ -58,12 +56,10 @@ For example to use [alertify.js](http://fabien-d.github.io/alertify.js/) to conf
 <script>
 angular.module('ClickApp', ['confirm-click'])
   .config(function (ConfirmClickProvider) {
-    ConfirmClickProvider.set({
-      async: function (question) {
-        return new Promise(function (resolve) {
-          alertify.confirm(question, resolve);
-        });
-      }
+    ConfirmClickProvider.ask(function (question) {
+      return new Promise(function (resolve) {
+        alertify.confirm(question, resolve);
+      });
     });
   })
 </script>
